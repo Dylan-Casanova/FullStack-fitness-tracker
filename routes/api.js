@@ -5,28 +5,40 @@ const Workout = require("../models/workout.js");
 const db = require('../models');
 
 router.get("/workouts", (req, res) => {
-  Workout.aggrate([
+  Workout.aggregate([
     {
       $addFields: {
-        totalDuration: { $sum: "$exercises.duration" }
-      },
-    },
+        totalDuration: { $sum : "$exercises.duration" }
+      }
+    }
   ])
-    .then(workout => {
-      res.json(workout);
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(400).json(err);
-    });
-});
-
-router.get("/api/workouts/range", ({ }, res) => {
-  db.Workout.find({}).then((dbWorkout) => {
-    res.json(dbWorkout);
-  }).catch(err => {
+  .then(workout => {
+    res.json(workout);
+  })
+  .catch(err => {
+    console.log(err);
     res.status(400).json(err);
   });
+});
+
+router.get('/workouts/range', (req, res) => {
+  Workout.aggregate([
+    {
+      $addFields: {
+        totalDuration: { $sum : "$exercises.duration" }
+      }
+    },
+    { $sort: { day:-1 } },
+    { $limit: 7 },
+    { $sort: { day:1 } }
+  ])
+  .then(data => {
+    res.json(data);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(400).json(err);
+  })
 });
 
 router.post("/workouts", (req, res) => {
