@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const path = require('path');
 
-//establishing home route
+// home route
 router.get('/', function(req, res) {
     try{
         res.sendFile(path.join(__dirname, '../public/index.html'));
@@ -12,23 +12,15 @@ router.get('/', function(req, res) {
 });
 
 //sending user to exercise html
-router.get('/exercise', async (req, res) => {
-    try{
-        res.sendFile(path.join(__dirname, '../public/exercise.html'));
-    }
-    catch{
-        res.json({error})
-    }
-});
+router.get("/exercise", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/exercise.html"));
+  
+  })
 
 //sending user to stats html
-router.get('/stats', async (req, res) => {
-    try{
-        res.sendFile(path.join(__dirname, '../public/stats.html'));
-    }
-    catch{
-        res.json({error})
-    }
-});
+router.get("/stats", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/stats.html"));
+  
+  })
 
 module.exports=router;

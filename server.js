@@ -1,9 +1,11 @@
 const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
-//! require("./seeders/seed"); // Either npm run seed or keep this in here uncommented and it will run the seed
+const path = require("path");
+const routes = require("./routes");
 
-const PORT = process.env.PORT || 3000;
+
+const PORT = process.env.PORT || 3001;
 
 const app = express();
 
@@ -11,16 +13,15 @@ app.use(logger("dev"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
+app.use(routes);
 
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useUnifiedTopology: true,
+  useCreateIndex: true
 });
-
-//require(apiRoute)(app);
-require("./routes/htmlroutes")(app);
-require("./routes/apiroutes")(app);
 
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
