@@ -2,13 +2,9 @@ const router = require('express').Router();
 const path = require('path');
 
 // home route
-router.get('/', function(req, res) {
-    try{
-        res.sendFile(path.join(__dirname, '../public/index.html'));
-    }
-    catch{
-        res.json({error})
-    }
+router.get("/", function(req,res) {
+  res.sendFile(path.join(__dirname, "../public/index.html"));
+
 });
 
 //sending user to exercise html
