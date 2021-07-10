@@ -1,4 +1,6 @@
 # unit17-fitness-tracker
+## Deployed app
+<a href="https://fit2track.herokuapp.com"> click here </a>
 # Description 
 Fitness tracker is a full stack application that allows users to track their workouts. <br>
 At the homescreen, the user can see the summary of the last workout. the user also has the option of adding a new workout or adding a new exercis to their current workout. <br>
@@ -14,8 +16,6 @@ At the homescreen, the user can see the summary of the last workout. the user al
 <li>on integrated terminal run "npm start" to start the application.</li>
 <li> enjoy the fruits of your hard work<li> </ul>
 
-## Deployed app
-<a href="https://fit2track.herokuapp.com"> click here </a>
 
 ## Contact information 
 
